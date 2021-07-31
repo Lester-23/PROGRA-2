@@ -1,0 +1,238 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.inicio;
+
+import static com.mycompany.inicio.Class24Matrices.ma;
+import static java.lang.System.in;
+import java.util.Scanner;
+
+/**
+ *
+ * @author leste
+ */
+public class Parte2Class24 {
+    
+    private static final int NOMBRE = 0;
+    private static final int ENERO = 1;
+    private static final int FEBRERO = 2;
+    private static final int MARZO = 3;
+    private static final int TOTAL = 4;
+    private static final int PROMEDIO = 5;
+    private static final int MAY = 6;
+    private static final int busc= 7;
+    private static final String[] meses = new String []{"ENERO","FEBRERO","MARZO"};
+    
+    
+    private static String[][] comisiones = new String[3][6];
+    private static int fila;
+    
+        
+    
+    public static void cargaInformacion(int fila){
+        
+        
+        Scanner t = new Scanner(System.in);
+        int valor, suma=0, prom=0, mayor=0;    
+        System.out.println("Ingrese Nombre "+(fila+1));
+        comisiones[fila][NOMBRE]= t.nextLine();
+        
+            for (int i =1; i<=comisiones.length;i++){
+                System.out.println("Ingrese mes de "+ meses[i-1]);
+                comisiones[fila][i]= t.nextLine();
+                valor=Integer.parseInt(comisiones[fila][i]);
+                suma = suma+valor;
+                comisiones[fila][TOTAL]=Integer.toString(suma);
+                prom = suma / 3;
+                comisiones[fila][PROMEDIO]=Integer.toString(prom);
+                
+                
+            }
+          
+    }
+    
+    public static void comparacionVentas(String[][] ma) {
+        
+        int tMayor = Integer.parseInt(ma[0][4]);
+        int tMenor =Integer.parseInt(ma[0][4]);
+      
+        int filaMa = 0;
+        int filaMe =0;
+        
+            for (int x = 0; x < 3; x++) {
+          
+                if (Integer.parseInt(ma[x][4])>tMayor)
+                {tMayor=Integer.parseInt(ma[x][4]);
+                    filaMa = x;
+            }            
+            
+            
+        }
+      System.out.println("\nEl empleado "+ ma[filaMa][0]+ " ha realizado MAS ventas en los tres meses, con un total de: "+ tMayor);
+    }
+    
+    
+    
+    public static void comparacionVentasMes(String[][] ma) {
+        
+        int vMayorE = Integer.parseInt(ma[0][1]), vMayorF = Integer.parseInt(ma[0][2]), vMayorM = Integer.parseInt(ma[0][3]);
+        int vMenorE = Integer.parseInt(ma[0][1]), vMenorF = Integer.parseInt(ma[0][2]), vMenorM = Integer.parseInt(ma[0][3]);
+      
+        int filaMaE = 0, filaMaF = 0, filaMaM = 0;
+        int filaMeE =0, filaMeF = 0, filaMeM = 0;
+      for (int x = 0; x < 3; x++) {
+          
+            if (Integer.parseInt(ma[x][1])>vMayorE)
+            {vMayorE=Integer.parseInt(ma[x][1]);
+                filaMaE = x;
+            }
+             if (Integer.parseInt(ma[x][1])<vMenorE)
+            {vMenorE=Integer.parseInt(ma[x][1]);
+                filaMeE = x;
+            }
+            
+            
+        }
+        for (int x = 0; x < 3; x++) {
+          
+            if (Integer.parseInt(ma[x][2])>vMayorF)
+            {vMayorF=Integer.parseInt(ma[x][2]);
+                filaMaF = x;
+            }
+             if (Integer.parseInt(ma[x][2])<vMenorF)
+            {vMenorF=Integer.parseInt(ma[x][2]);
+                filaMeF = x;
+            }
+        }
+        
+        for (int x = 0; x < 3; x++) {
+          
+            if (Integer.parseInt(ma[x][2])>vMayorM)
+            {vMayorF=Integer.parseInt(ma[x][2]);
+                filaMaM = x;
+            }
+             if (Integer.parseInt(ma[x][2])<vMenorM)
+            {vMenorF=Integer.parseInt(ma[x][2]);
+                filaMeM = x;
+            }
+        }
+        System.out.println("\nEMPLEADOS QUE TUVIERON MAYOR VENTAS POR MES\n");
+        System.out.println("El empleado "+ ma[filaMaE][0]+ " realizo mas ventas en el mes de ENERO: "+ vMayorE);
+        System.out.println("El empleado "+ ma[filaMaF][0]+ " realizo mas ventas en el mes de FEBRERO: "+ filaMaF);
+        System.out.println("El empleado "+ ma[filaMaM][0]+ " realizo mas ventas en el mes de MARZO: \n"+ filaMaM);        
+        
+        
+        System.out.println("\nEMPLEADOS QUE TUVIERON MENOR VENTAS POR MES\n");
+        System.out.println("El empleado "+ ma[filaMeE][0]+ " realizo mas ventas en el mes de ENERO: "+ vMenorE);
+        System.out.println("El empleado "+ ma[filaMeF][0]+ " realizo mas ventas en el mes de FEBRERO: "+ vMenorF);
+        System.out.println("El empleado "+ ma[filaMeM][0]+ " realizo mas ventas en el mes de FEBRERO: "+ vMenorM);
+        
+        
+    }  
+    public static void imprimirDecorado(String[][] ma){
+        for (int x = 0; x< ma.length; x++){            
+            System.out.print("|\t");
+            for (int y = 0;  y< ma[x].length; y++){
+                System.out.print(ma[x][y]);
+                if (y != ma[x].length - 1){
+                    System.out.print("\tQ.");
+                }
+            }
+            
+            System.out.println("\t|");
+        }
+    }
+    
+    
+    public static void registro(){
+        Scanner t = new Scanner(System.in);
+         
+        for(int i = 0; i < comisiones.length; i++){
+            cargaInformacion(i);
+        }
+    }
+    
+    private static void buscar(){
+        Scanner t = new Scanner(System.in);
+        
+        System.out.println("---Digite un valor a buscar---");
+String buscar = t.next();
+String coordenadas=" ";
+  for(int filas=0;filas<ma.length;filas++){
+   for(int columnas=0;columnas<ma[filas].length;columnas++){
+    if(ma[filas][columnas]==buscar){
+     coordenadas+="["+filas+","+columnas+"]"+"\n";
+             }
+         }
+     }
+  if(coordenadas.equals("")){
+   System.out.println("El valor "+buscar+" no existe en la matriz--");
+  }else{
+   System.out.println("El valor "+buscar+" esta en la(s) siguiente(s) coordenadas");
+   System.out.print(coordenadas);
+  }
+    }  
+    
+    
+    
+    public static void main(String[] args){
+        Scanner sn = new Scanner(System.in);
+       boolean salir = false;
+       int opcion; 
+        
+       while(!salir){
+           
+           
+           
+           System.out.println("\n1. Ingreso de informacion");
+           System.out.println("2. Consulta de quien vendió más por mes y quién vendió menos");
+           System.out.println("3. Consulta de quién vendió más en los 3 meses");
+           System.out.println("4. Modificar datos en la matriz");
+           System.out.println("5. Busqueda de venta por cantidad");
+           System.out.println("6. Mostrar matriz en pantalla");
+           System.out.println("7. Salir");            
+           System.out.println("\nEscribe una de las opciones");
+           opcion = sn.nextInt();
+           
+            switch(opcion){
+               case 1:
+                   System.out.println("Ingreso de informacion");
+                   registro();                   
+                   break;
+               case 2:
+                   System.out.println("Consulta de quien vendió más por mes y quién vendió menos");
+                   comparacionVentasMes(comisiones);
+                   break;
+                case 3:
+                   System.out.println("Consulta de quién vendió más en los 3 meses");
+                   comparacionVentas(comisiones); 
+                   break;
+                case 4:
+                   System.out.println("Modificar datos en la matriz");
+                   break;
+                case 5:
+                   System.out.println("Busqueda de venta por cantidad");
+                   buscar();
+                   break;
+                case 6:
+                   System.out.println("Mostrar matriz en pantalla");
+                   imprimirDecorado(comisiones); 
+                   break;  
+                case 7:                   
+                   salir=true;
+                   break;
+                default:
+                   System.out.println("Solo números entre 1 y 7");
+           }
+           
+           
+       }while(!salir);  
+    
+        registro();        
+        
+    }
+
+    
+}
